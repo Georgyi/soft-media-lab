@@ -20,14 +20,14 @@ type Props = {
   initialStudentData: null | StudentType
 }
 
-const initialStudentFormValues: StudentType = {
+const initialStudentFormValues = (): StudentType => ({
   id: uniqid(),
   firstName: null,
   lastName: null,
   patronymic: null,
   birthday: null,
   progress: null,
-};
+});
 
 const dateFormatList: string[] = ['DD/MM/YYYY', 'DD/MM/YY'];
 
@@ -39,7 +39,7 @@ const StudentModalForm: React.FC<Props> = (props) => {
     if (initialStudentData) {
       setFormValues({...initialStudentData})
     } else {
-      setFormValues({ ...initialStudentFormValues });
+      setFormValues({...initialStudentFormValues()});
     }
   }, [initialStudentData]);
 
