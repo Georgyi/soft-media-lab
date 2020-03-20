@@ -3,6 +3,7 @@ import { Dispatch } from 'redux';
 import * as types from './types';
 import { StudentType } from './reducer';
 import { AppStateType } from '../../store/rootReducer';
+import { LS_KEYS } from './constants';
 
 export type StudentActions = AddStudentActionType | UpdateStudentActionType | RemoveStudentActionType
   | ShowStudentModalActionType | CloseStudentModalActionType | FetchStudentsErrorActionType
@@ -20,7 +21,7 @@ const addStudentAction = (students: StudentType[]): AddStudentActionType => {
 export const addStudent = (student: StudentType) => (dispatch: Dispatch, getState: () => AppStateType) => {
   const students: Array<StudentType> = [...getState().studentsReducer.students, student];
 
-  localStorage.setItem('students', JSON.stringify(students));
+  localStorage.setItem(LS_KEYS.students, JSON.stringify(students));
 
   dispatch(addStudentAction(students));
 };
@@ -38,7 +39,7 @@ export const updateStudent = (updateStudent: StudentType) => (dispatch: Dispatch
   const updatedStudents: Array<StudentType> = [...getState().studentsReducer.students]
     .map((student: StudentType) => student.id === updateStudent.id ? updateStudent : student);
 
-  localStorage.setItem('students', JSON.stringify(updatedStudents));
+  localStorage.setItem(LS_KEYS.students, JSON.stringify(updatedStudents));
 
   dispatch(updateStudentAction(updatedStudents));
 };
@@ -56,7 +57,7 @@ export const removeStudent = (id: string) => (dispatch: Dispatch, getState: () =
   const students: Array<StudentType> = [...getState().studentsReducer.students]
     .filter((student: StudentType) => student.id !== id);
 
-  localStorage.setItem('students', JSON.stringify(students));
+  localStorage.setItem(LS_KEYS.students, JSON.stringify(students));
 
   dispatch(removeStudentAction(students));
 };

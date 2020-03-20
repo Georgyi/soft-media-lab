@@ -17,7 +17,7 @@ type Props = {
 }
 
 const StudentList: React.FC<Props> = ({ students, showStudentModal, removeStudent, isLoadingStudents }) => {
-  const getStudentsDataSource = (students: Array<StudentType>) =>
+  const getStudentsDataSource = (students: Array<StudentType> = []) =>
     students.map((student) => ({
       ...student,
       key: student.id,
